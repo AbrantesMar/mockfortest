@@ -1,0 +1,85 @@
+<div class="container">
+  <h2 class="my-2">Mock Motor ADT</h2>
+  <div class="row">
+    <form (ngSubmit)="submit()" #adtForm="ngForm">
+      <div class="col-md-6" >
+        <h3 class="my-2">Request</h3>
+          <div class="form-group">
+            <label for="cdPropostaLegado">Proposta ADP</label>
+            <input type="text" class="form-control" [(ngModel)]="adt.request.number" name="cdPropostaLegado" id="cdPropostaLegado">
+          </div>
+          <div class="form-group">
+            <label for="cdCupom">Cupom</label>
+            <input type="text" class="form-control" [(ngModel)]="adt.request.cupom.code" name="cdCupom"
+                  id="cdCupom" >
+          </div>
+          <div class="form-group">
+            <label for="cdEmpresa ">Empresa</label>
+            <select class="form-control" name="cdEmpresa" id="cdEmpresa"
+                    [(ngModel)]="adt.request.company.code">
+              <option value="">SELECIONAR</option>
+              <option value="03">Santander</option>
+              <option value="15">Hyundai </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cdModalidade">Modalidade</label>
+            <select class="form-control" name="cdModalidade" id="cdModalidade"
+                    [(ngModel)]="adt.request.modality.code">
+              <option value="">SELECIONAR</option>
+              <option value="P">Padrao</option>
+              <option value="90">FLEX</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cdFormaPagto">Forma de pagamento</label>
+            <select class="form-control" name="cdFormaPagto" id="cdFormaPagto"
+                    [(ngModel)]="adt.request.formPayment.code">
+              <option value="">SELECIONAR</option>
+              <option value="DC">Debito em Conta</option>
+              <option value="CA">Boleto</option>
+            </select>
+          </div>
+        </div>
+        
+      <div class="col-md-6 " >
+        <h3 class="my-2">Response</h3>
+        <div class="form-group">
+          <label for="cdTabela">Codigo tabela</label>
+          <input type="text" class="form-control" [(ngModel)]="adt.response.financingTable.code" name="cdTabela" id="cdTabela">
+        </div>
+        <div *ngFor="let packet of adt.response.packets; let i=index">
+            <div class="form-group">
+                <label for="numeroPacote">Número Pacote {{i + 1}}</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" [(ngModel)]="adt.response.packets[i].number" name="numeroPacote{{i}}"
+                    id="numeroPacote{{i}}" >
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" 
+                                type="button" (click)="deletePacket(i)" 
+                                [disabled]="this.adt.response.packets.length <= 1">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                      </span>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn"
+                [disabled]="this.adt.response.packets.length >= 3" 
+                (click)="addPacket()">
+            Adicionar pacote
+        </button>
+      </div>
+      <div class="col-md-12" >
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Salvar</button>
+          </div>
+      </div>
+    </form>
+  </div>
+  <div class="row jumbotron">
+      <div class="col-md-12" >
+        {{adt | json}}
+       </div>
+  </div>
+</div>
