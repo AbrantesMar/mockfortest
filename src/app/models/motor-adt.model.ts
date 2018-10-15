@@ -3,6 +3,6 @@ import { MotorAdtRequest } from "./motor-adt-request.model";
 
 export class MotorAdt {
     _id?: string;
-    request: MotorAdtRequest = new MotorAdtRequest()
-    response: MotorAdtResponse = new MotorAdtResponse()
+    request: Object = new Object({creditApplication : new MotorAdtRequest()});
+    response: MotorAdtResponse = new MotorAdtResponse();
 }
