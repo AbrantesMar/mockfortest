@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MotorAdt } from '../models/motor-adt.model';
 import { Observable } from 'rxjs';
+import { MockService } from '../services/MockService';
 
 @Component({
   selector: 'app-mock-adt',
@@ -10,14 +11,17 @@ import { Observable } from 'rxjs';
 })
 export class MockAdtComponent implements OnInit {
 
-  motorAdt: MotorAdt; 
+  motorAdts: MotorAdt[];
+
 
   constructor(
-    private http: HttpClient
-  ){ }
+    private mockService: MockService
+  ) { }
+
   ngOnInit() {
-    this.http.get<MotorAdt>('/api/adt').subscribe(data => {
-      this.motorAdt = data;
+    this.mockService.getMotorAdts()
+    .subscribe((response: MotorAdt[]) => {
+      this.motorAdts = response;
     });
   }
 }

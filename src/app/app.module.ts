@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MockAdtComponent } from './mock-adt/mock-adt.component';
 import { MockAdtCreateComponent } from './mock-adt-create/mock-adt-create.component';
+import { MockService } from './services/MockService';
 
 const routes: Routes = [
   {
@@ -40,7 +41,9 @@ const routes: Routes = [
       routes,
     )
   ],
-  providers: [],
+  providers: [
+    MockService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
